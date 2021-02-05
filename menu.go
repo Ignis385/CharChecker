@@ -65,7 +65,7 @@ func CharLoad() {
 		fmt.Println("Неверный путь", charPath)
 		return
 	}
-	charList = make([]Character, 0)
+	charList = make([]Character, 0, len(files))
 
 	for _, f := range files {
 		if f.IsDir() {
@@ -136,7 +136,8 @@ func ReadDef(s string) {
 		}
 	}
 	if name != "" {
-		charList = append(charList, Character{FileName: s, Name: name, Dname: dname, Author: author})
+		charList = charList[:len(charList)+1]
+		charList[len(charList)-1] = Character{s, name, dname, author}
 	}
 }
 
